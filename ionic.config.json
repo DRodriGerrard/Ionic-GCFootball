@@ -1,0 +1,7 @@
+{
+  "name": "ionic-gcfootball",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
