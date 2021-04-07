@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>add-form</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+
+    <ion-item>
+      <ion-label>Equipo o Jugador?</ion-label>
+      <ion-select formControlName="role" (ionChange)="changeRole($any($event.target).value)">
+        <ion-select-option *ngFor="let role of roles">
+          {{role}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item *ngIf="isTeam">
+      <ion-label>A que liga pertecera?</ion-label>
+      <ion-select formControlName="league" (ionChange)="onChangeLeague($any($event.target).value)" >
+        <ion-select-option *ngFor="let league of leagues">
+            {{league.leagueName}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item *ngIf="isPlayer">
+      <ion-label>A que equipo pertecera?</ion-label>
+      <ion-select formControlName="team" (ionChange)="onChangeTeam($any($event.target).value)">
+        <ion-select-option *ngFor="let team of teams">
+            {{team.teamName}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item *ngIf="leagueSelected.leagueName !== undefined || teamSelected.teamName !== undefined">
+      <ion-label>Como se llama?</ion-label>
+      <ion-input formControlName="name" (ionChange)="checkName($any($event.target).value)"></ion-input>
+    </ion-item>
+    <ion-item>
+      <button type="submit" [disabled]="!valid">Save</button>
+    </ion-item>
+    <ion-item >
+      <div *ngIf="valid === false && isTeam" class="errormessages">
+        <span>Este equipo ya existe!</span>
+      </div>
+      <div *ngIf="valid === false && isPlayer" class="errormessages">
+        <span>Este jugador ya existe!</span>
+      </div>
+      <div class="successmessages">
+        <span *ngIf="teamSaved">Has guarado el nuevo Equipo!</span>
+        <span *ngIf="playerSaved">Has guardado el nuevo Jugador!</span>
+      </div>
+    </ion-item>
+
+  </form>
+
+</ion-content>

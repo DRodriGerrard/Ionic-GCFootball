@@ -11,6 +11,10 @@ export class TeamService {
 
   constructor(private http$: HttpClient) { }
 
+  public getTeams(): Observable<Team[]> {
+    return this.http$.get(`${environment.backUrl}/teams`) as Observable<Team[]>;
+  }
+
   public getTeamsByLeague(leagueID): Observable<Team[]> {
     return this.http$.get(`${environment.backUrl}/teams`, {
       params: { leagueId: leagueID }
@@ -19,5 +23,9 @@ export class TeamService {
 
   public getTeamById(id:string): Observable<Team> {
     return this.http$.get(`${environment.backUrl}/teams/${id}`) as Observable<Team>;
+  }
+
+  public postTeam(team:Team): Observable<Team> {
+    return this.http$.post(`${environment.backUrl}/teams`, team) as Observable<Team>
   }
 }

@@ -11,6 +11,10 @@ const routes: Routes = [
       {
         path: 'leagues',
         loadChildren: () => import('../pages/leagues/leagues.module').then( m => m.LeaguesPageModule)
+      },
+      {
+        path: 'add',
+        loadChildren: () => import('../pages/add-form/add-form.module').then( m => m.AddFormPageModule)
       }
     ]
   },

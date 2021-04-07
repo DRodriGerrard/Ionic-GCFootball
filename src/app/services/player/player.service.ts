@@ -20,4 +20,8 @@ export class PlayerService {
   public getPlayerById(id:string): Observable<Player> {
     return this.http$.get(`${environment.backUrl}/players/${id}`) as Observable<Player>;
   }
+
+  public postPlayer(player:Player): Observable<Player> {
+    return this.http$.post(`${environment.backUrl}/players`, player) as Observable<Player>
+  }
 }
