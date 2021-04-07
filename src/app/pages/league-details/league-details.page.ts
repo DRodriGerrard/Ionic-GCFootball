@@ -34,7 +34,7 @@ export class LeagueDetailsPage implements OnInit {
     private player$: PlayerService
   ) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.$getLeagueSubscriptor = this.acRoute.params.subscribe( ({id}) => {
       this.leagueId = id;
       this.league$.getLeagueById(id)
@@ -46,7 +46,7 @@ export class LeagueDetailsPage implements OnInit {
     })
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy() {
     this.$getLeagueSubscriptor.unsubscribe();
     this.$getTeamSubscriptor.unsubscribe();
     this.$getPlayerSubscriptor.unsubscribe();
@@ -54,22 +54,21 @@ export class LeagueDetailsPage implements OnInit {
 
 
   //Get data from api...
-  public showTeams(leagueId): Subscription {
-    return this.$getTeamSubscriptor = this.team$.getTeamsByLeague(leagueId).subscribe( (res:Team[]) => {
+  public showTeams(leagueId) {
+    this.$getTeamSubscriptor = this.team$.getTeamsByLeague(leagueId).subscribe( (res:Team[]) => {
       this.teams = res
 
       this.showPlayers(this.teams);
     })
   }
 
-  public showPlayers(teams:Team[]): Subscription {
+  public showPlayers(teams:Team[]) {
     teams.forEach( (team:Team) => {
         this.$getPlayerSubscriptor = this.player$.getPlayersByTeam(team.id!).subscribe( (res: Player[]) => {
         res.sort((a,b) => (a.playerName! > b.playerName!) ? 1 : ((b.playerName! > a.playerName!) ? -1 : 0));
         this.players = this.players.concat(res);
       });
     })
-    return this.$getPlayerSubscriptor;
   }
 
 

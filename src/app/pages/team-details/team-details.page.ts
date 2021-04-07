@@ -29,7 +29,7 @@ export class TeamDetailsPage implements OnInit {
     private navCtrl: NavController
   ) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
 
     this.getLeagueHref(window.location.href);
 
@@ -43,15 +43,15 @@ export class TeamDetailsPage implements OnInit {
     })
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy() {
     this.$getTeamSubscriptor.unsubscribe();
     this.$getPlayersSubscriptor.unsubscribe();
   }
 
 
   //Get data from api...
-  public showPlayers(teamId): Subscription {
-    return this.$getPlayersSubscriptor = this.player$.getPlayersByTeam(teamId).subscribe( (res:Player[]) => this.players = res);
+  public showPlayers(teamId) {
+    this.$getPlayersSubscriptor = this.player$.getPlayersByTeam(teamId).subscribe( (res:Player[]) => this.players = res);
   }
 
 

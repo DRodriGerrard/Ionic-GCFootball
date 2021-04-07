@@ -8,6 +8,10 @@ const routes: Routes = [
   },  {
     path: 'player-details',
     loadChildren: () => import('./pages/player-details/player-details.module').then( m => m.PlayerDetailsPageModule)
+  },
+  {
+    path: 'add-form',
+    loadChildren: () => import('./pages/add-form/add-form.module').then( m => m.AddFormPageModule)
   }
 
 

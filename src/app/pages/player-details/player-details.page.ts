@@ -20,14 +20,14 @@ export class PlayerDetailsPage implements OnInit {
     private player$: PlayerService,
   ) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.$getPlayersSubscriptor = this.acRoute.params.subscribe( ({id}) => {
       this.player$.getPlayerById(id)
       .subscribe( (res:Player) => this.player = res )
     })
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy() {
     this.$getPlayersSubscriptor.unsubscribe();
   }
 
